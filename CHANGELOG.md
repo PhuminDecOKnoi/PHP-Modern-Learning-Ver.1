@@ -8,11 +8,48 @@ The format follows the principles of [Keep a Changelog](https://keepachangelog.c
 
 ### Planned
 
-- Add executable examples for PHP 8.4 Property Hooks
-- Add PHP 8.5-only examples under a separate compatibility directory
-- Add MySQL integration tests using an isolated test database
+- Add container-based integration tests for PostgreSQL, Redis and MongoDB
 - Add static analysis and coding-style automation
+- Add architecture capstone project integrating modules 07–19
 - Review legacy root lessons and add canonical cross-links
+
+## [2026.08 — PHP Application Engineering Phase 2]
+
+### Added
+
+- Database driver and portable data-access lesson
+- SQLite local application and integration-testing lesson
+- PostgreSQL advanced SQL, JSONB and concurrency lesson
+- MongoDB professional document-modeling lesson
+- Redis/Valkey cache, session and distributed rate-limit lesson
+- Filesystem, streams and safe file-processing lesson
+- CSV, JSON, NDJSON, XML and ZIP processing lesson
+- HTTP client, cURL, URI and PSR-7/17/18 lesson
+- TCP, UDP, TLS, network streams and socket lesson
+- Unicode, Thai language and internationalization lesson
+- Queue, worker, idempotency, outbox/inbox and DLQ lesson
+- PSR-3 logging, metrics, SLO and observability lesson
+- Storage architecture, object storage and retention lesson
+- Executable streaming `CsvRecordReader`
+- PHPUnit tests for CSV header mapping and failure cases
+- Optional extension/package matrix in `composer.json`
+- Technology matrix document for module prerequisites and production concerns
+
+### Changed
+
+- Expanded README from seven foundational lessons to a twenty-lesson application-engineering curriculum
+- Grouped learning path into Foundation, Database, Data Exchange, Network and Operations modules
+- Added explicit failure modes, security controls, testing strategy and production checklists to every Phase 2 lesson
+- Clarified that optional infrastructure technologies are not mandatory core dependencies
+- Extended production guidance to cover SSRF, archive extraction, cache stampede, retry, backpressure, Unicode and storage governance
+
+### Validation
+
+- PHP 8.4 and PHP 8.5 CI matrix
+- Composer strict validation
+- PHP syntax checks
+- PHPUnit 13 tests
+- CSV parser tests use temporary files and require no external service
 
 ## [2026.07 — PHP 8.4–8.5 Edition]
 
