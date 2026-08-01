@@ -51,11 +51,6 @@ final readonly class CsvRecordReader
         }
 
         $file = new SplFileObject($path, 'rb');
-        $file->setFlags(
-            SplFileObject::READ_CSV
-            | SplFileObject::SKIP_EMPTY
-            | SplFileObject::DROP_NEW_LINE,
-        );
         $file->setCsvControl(
             $this->separator,
             $this->enclosure,
@@ -81,16 +76,19 @@ final readonly class CsvRecordReader
             throw new RuntimeException('CSV header contains duplicate columns.');
         }
 
-        foreach ($file as $zeroBasedLine => $row) {
+        $lineNumber = 1;
+
+        while (!$file->eof()) {
+            $row = $file->fgetcsv();
+            $lineNumber++;
+
             if (!is_array($row) || $row === [null]) {
                 continue;
             }
 
-            $humanLineNumber = $zeroBasedLine + 1;
-
             if (count($row) !== count($normalizedHeader)) {
                 throw new RuntimeException(
-                    "CSV column count mismatch on line {$humanLineNumber}.",
+                    "CSV column count mismatch on line {$lineNumber}.",
                 );
             }
 
@@ -98,11 +96,11 @@ final readonly class CsvRecordReader
 
             if ($record === false) {
                 throw new RuntimeException(
-                    "Unable to map CSV row on line {$humanLineNumber}.",
+                    "Unable to map CSV row on line {$lineNumber}.",
                 );
             }
 
-            yield $humanLineNumber => $record;
+            yield $lineNumber => $record;
         }
     }
 }
